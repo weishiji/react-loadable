@@ -25,10 +25,10 @@ export default class App extends React.Component {
 - ["我现在非常痴迷于: create-react-app、React Router v4 和 react-loadable的使用. 自由的代码分割, 太简单了."](https://twitter.com/matzatorski/status/872059865350406144)
 - ["Webpack 2 upgrade & react-loadable; 花两个小时就可以将初始化加载文件从1.1mb降到529kb."](https://twitter.com/jwbradley87/status/847191118269833216)
 - ["Oh hey - 使用 loadable 组件 让我初始化加载文件降到13kB. yeah!轻松搞定"](https://twitter.com/AdamRackis/status/846593080992153600)
-- ["Had a look and its awesome. shaved like 50kb off our main bundle."](https://github.com/quran/quran.com-frontend/pull/701#issuecomment-287908551)
-- ["I've got that server-side rendering + code splitting + PWA ServiceWorker caching setup done 😎 (thanks to react-loadable). Now our frontend is super fast."](https://twitter.com/mxstbr/status/922375575217627136)
+- ["太令人惊叹了. 让我主打包文件减少了50kb."](https://github.com/quran/quran.com-frontend/pull/701#issuecomment-287908551)
+- ["我使用了 server-side rendering(服务端渲染) + code splitting(代码分割) + PWA ServiceWorker 来缓存数据和资源 😎 (感谢 react-loadable). 现在我的前端程序快到飞起."](https://twitter.com/mxstbr/status/922375575217627136)
 
-## Users
+## 用户
 
 - [Atlassian](https://www.atlassian.com/)
 - [Cloudflare](https://www.cloudflare.com)
@@ -40,8 +40,7 @@ export default class App extends React.Component {
 - [Tinder](https://tinder.com/)
 - [Unsplash](https://unsplash.com/)
 
-> _If your company or project is using React Loadable, please open a PR and add
-> yourself to this list (in alphabetical order please)_
+> _ 如果你的公司或者项目也在使用 React Loadable，请加入这个列表(按照字母顺序)
 
 ## Also See:
 
