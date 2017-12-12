@@ -1,10 +1,10 @@
 ![React Loadable](http://thejameskyle.com/img/react-loadable-header.png)
 
-> A higher order component for loading components with dynamic imports.
+> 一个动态导入加载组件高阶组件.
 
 ## Example
 
-```js
+```jsx
 import Loadable from 'react-loadable';
 import Loading from './my-loading-component';
 
