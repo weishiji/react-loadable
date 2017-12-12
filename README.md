@@ -63,25 +63,21 @@ export default class App extends React.Component {
 
 Code-splitting（代码分割）是把项目中一个大的入口文件分割成多个小的、单独的文件的进程。
 
-This might seem difficult to do, but tools like Webpack have this built in, and
-React Loadable is designed to make it super simple.
+这看起来很难，但是一些类似于Webpack的工具已经做到这些了，并且React Loadable是为了让这件事儿变得更加简单。
 
-### Route-based splitting vs. Component-based splitting
+### Route-based splitting(基于路由的代码风格) vs. Component-based splitting(基于组件的代码分割)
 
-A common piece of advice you will see is to break your app into separate routes
-and load each one asynchronously. This seems to work well enough for many apps–
-as a user, clicking a link and waiting for a page to load is a familiar
-experience on the web.
+一般我们建议通过不同路由切断你的程序，并且异步加载它们，这对于大多数应用来讲很不错-在浏览器里一个用户点击一个链接并且等待页面加载完成是一个在正常不过的行为。
 
-But we can do better than that.
 
-Using most routing tools for React, a route is simply a component. There's
-nothing particularly special about them (Sorry Ryan and Michael– you're what's
-special). So what if we optimized for splitting around components instead of
-routes? What would that get us?
+但是我们可以做的更好。
+
+在React的大多数路由工具中，一个路由就是一个简单的组件,这真没有什么特殊的(Sorry Ryan和Michael-你们是特殊的)。所以我们如果通过组件而不是路由优化分割代码，我们会得到什么呢？
+
 
 ![Route vs. component centric code splitting](http://thejameskyle.com/img/react-loadable-component-splitting.png)
 
+事实证明：相当多。
 As it turns out: Quite a lot. There are many more places than just routes where
 you can pretty easily split apart your app. Modals, tabs, and many more UI
 components hide content until the user has done something to reveal it.
