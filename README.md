@@ -1,8 +1,8 @@
 ![React Loadable](http://thejameskyle.com/img/react-loadable-header.png)
 
-> 一个动态导入加载组件高阶组件.
+> 一个动态导入加载组件的高阶组件.
 
-## Example
+## 示例
 
 ```jsx
 import Loadable from 'react-loadable';
@@ -20,11 +20,11 @@ export default class App extends React.Component {
 }
 ```
 
-## Happy Customers:
+## 用户反馈:
 
-- ["I'm obsessed with this right now: CRA with React Router v4 and react-loadable. Free code splitting, this is so easy."](https://twitter.com/matzatorski/status/872059865350406144)
-- ["Webpack 2 upgrade & react-loadable; initial load from 1.1mb to 529kb in under 2 hours. Immense."](https://twitter.com/jwbradley87/status/847191118269833216)
-- ["Oh hey - using loadable component I knocked 13K off my initial load. Easy win!"](https://twitter.com/AdamRackis/status/846593080992153600)
+- ["我现在非常痴迷于: create-react-app、React Router v4 和 react-loadable的使用. 自由的代码分割, 太简单了."](https://twitter.com/matzatorski/status/872059865350406144)
+- ["Webpack 2 upgrade & react-loadable; 花两个小时就可以将初始化加载文件从1.1mb降到529kb."](https://twitter.com/jwbradley87/status/847191118269833216)
+- ["Oh hey - 使用 loadable 组件 让我初始化加载文件降到13kB. yeah!轻松搞定"](https://twitter.com/AdamRackis/status/846593080992153600)
 - ["Had a look and its awesome. shaved like 50kb off our main bundle."](https://github.com/quran/quran.com-frontend/pull/701#issuecomment-287908551)
 - ["I've got that server-side rendering + code splitting + PWA ServiceWorker caching setup done 😎 (thanks to react-loadable). Now our frontend is super fast."](https://twitter.com/mxstbr/status/922375575217627136)
 
