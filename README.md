@@ -44,7 +44,7 @@ export default class App extends React.Component {
 
 ## Also See:
 
-- [`react-loadable-visibility`](https://github.com/stratiformltd/react-loadable-visibility) - Building on top of and keeping the same API as `react-loadable`, this library enables you to load content that is visible on the screen.
+- [`react-loadable-visibility`](https://github.com/stratiformltd/react-loadable-visibility) 和 `react-loadable` 使用相同的API构建, 这个组件能让你动态加载只显示在屏幕上的组件.
 
 <h2>
   <hr>
@@ -55,17 +55,13 @@ export default class App extends React.Component {
   <small>Guide</small>
 </h2>
 
-So you've got your React app, you're bundling it with Webpack, and things are
-going smooth. But then one day you notice your app's bundle is getting so big
-that it's slowing things down.
+所以你现在有了一个React App, 并且你用Webpack去打包你的应用, 所有的事情看起来是那么的顺畅. 但是有一天你突然发现你的文件变得越来越大，打包变得越来越慢。
 
-It's time to start code-splitting your app!
+这时候我们是时候该引入 code-splitting（代码分割）到我们的项目中了!
 
 ![A single giant bundle vs multiple smaller bundles](http://thejameskyle.com/img/react-loadable-split-bundles.png)
 
-Code-splitting is the process of taking one large bundle containing your entire
-app, and splitting them up into multiple smaller bundles which contain separate
-parts of your app.
+Code-splitting（代码分割）是把项目中一个大的入口文件分割成多个小的、单独的文件的进程。
 
 This might seem difficult to do, but tools like Webpack have this built in, and
 React Loadable is designed to make it super simple.
