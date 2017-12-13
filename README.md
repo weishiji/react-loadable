@@ -133,10 +133,7 @@ class MyComponent extends React.Component {
 }
 ```
 
-But that's a whole bunch of work, and it doesn't even handle a bunch of cases.
-What about when `import()` fails? What about server-side rendering?
-
-Instead you can use `Loadable` to abstract away the problem.
+但是这是一整个工作流程，并不是单纯的代码分割这一件事儿这么简单，比如当`import()`失败我们该怎么办？怎么作server-side rendering(服务端渲染)？这时候你可以抽象出`Loadable`来解决这些问题。
 
 ```js
 import Loadable from 'react-loadable';
@@ -155,21 +152,14 @@ class MyComponent extends React.Component {
 }
 ```
 
-### Automatic code-splitting on `import()`
+### 通过 `import()`自动 code-splitting(代码分割)
 
-When you use `import()` with Webpack 2+, it will
-[automatically code-split](https://webpack.js.org/guides/code-splitting/) for
-you with no additional configuration.
+在webpack2+中，当你使用`import()`的时候，它会为你[自动代码分割](https://webpack.js.org/guides/code-splitting/)，而不用做外的设置。
 
-This means that you can easily experiment with new code splitting points just
-by switching to `import()` and using React Loadable. Figure out what performs
-best for your app.
+这意味着通过使用React Loadable和`import()`可以很快的实验出新的代码分割点来，这是程序中的最佳实践.
 
-### Creating a great "Loading..." Component
-
-Rendering a static "Loading..." doesn't communicate enough to the user. You
-also need to think about error states, timeouts, and making it a nice
-experience.
+### 创建一个更好的"Loading..." 组件
+渲染一个静态的"Loading..."已经不能传达出足够的信息给用户了。有时有我们还要想要表现出更多的状态来，比如错误和超时等,这是一个非常好的经历。
 
 ```js
 function Loading() {
@@ -181,15 +171,11 @@ Loadable({
   loading: Loading,
 });
 ```
+这样做非常好，你的[loading component](#loadingcomponent)会接收多个不同的props。
 
-To make this all nice, your [loading component](#loadingcomponent) receives a
-couple different props.
+#### Loading 的错误状态
 
-#### Loading error states
-
-When your [`loader`](optsloader) fails, your [loading component](#loadingcomponent)
-will receive an [`error`](propserror) prop which will be `true` (otherwise it
-will be `false`).
+当[`loader`](optsloader)加载失败，[loading component](#loadingcomponent)组件会接收一个[`error`](propserror)为`true`的prop(否则为`false`).
 
 ```js
 function Loading(props) {
@@ -201,10 +187,9 @@ function Loading(props) {
 }
 ```
 
-#### Avoiding _Flash Of Loading Component_
+#### 避免 Loading 组件闪烁的问题
 
-Sometimes components load really quickly (<200ms) and the loading screen only
-quickly flashes on the screen.
+有时候你的组件加载速度非常快(<200ms),Loading组件的loading效果在屏幕上一闪而过，好像屏幕在闪动(译者注：一般300ms,就不会出现这种屏幕闪动的不适感了).
 
 A number of user studies have proven that this causes users to perceive things
 taking longer than they really have. If you don't show anything, users perceive
