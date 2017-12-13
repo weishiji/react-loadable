@@ -77,11 +77,9 @@ Code-splitting（代码分割）是把项目中一个大的入口文件分割成
 
 ![Route vs. component centric code splitting](http://thejameskyle.com/img/react-loadable-component-splitting.png)
 
-事实证明：相当多。不仅仅是通过路由，还有更多的地方你可以将你的应用程序拆分出来，Modals、tabs还有许多隐藏的UI组件，当用户执行某些操作的时候，你再去加载他们。
+事实证明：相当多。不仅仅是通过路由，还有更多的地方你可以将你的应用程序拆分出来，Modals、tabs还有许多隐藏的UI组件，当用户执行某些操作的时候，你再去加载他们。
 
-> **Example:** 假设你的主应用程序是在一个选项卡里 Why
-> would you load a massive mapping library for the parent route every time when
-> the user may never go to that tab?
+> **Example:** 假设你的主应用程序是在一个选项卡里,用户可能永远也不会进入这个选项卡下的应用程序，所以父路由组件为何要加载这个选项卡所对应的组件呢？ 
 
 Not to mention all the places where you can defer loading content until higher
 priority content is finished loading. That component at the bottom of your page
