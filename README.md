@@ -81,29 +81,21 @@ Code-splitting（代码分割）是把项目中一个大的入口文件分割成
 
 > **Example:** 假设你的主应用程序是在一个选项卡里,用户可能永远也不会进入这个选项卡下的应用程序，所以父路由组件为何要加载这个选项卡所对应的组件呢？ 
 
-Not to mention all the places where you can defer loading content until higher
-priority content is finished loading. That component at the bottom of your page
-which loads a bunch of libraries: Why should that be loaded at the same time as
-the content at the top?
+还有一个地方，你可以优先加载优先级高的组件。那些页面底部的组件为何要和页面顶部的组件同时加载呢？
 
-And because routes are just components, we can still easily code-split at the
-route level.
+由于路由即组件，所以我们仍然可以很轻松的在组件层面做code-split(代码分割)
 
-Introducing new code-splitting points in your app should be so easy that you
-don't think twice about it. It should be a matter of changing a few lines of
-code and everything else should be automated.
+在一个新项目中使用`code-spliting`非常简单，以至于你都不用想两遍，你只需要改动少量代码就可以完成自动的代码分割。
 
-### Introducing React Loadable
+### React Loadable 简介
 
-React Loadable is a small library that makes component-centric code splitting
-incredibly easy in React.
+React Loadable 是一个轻量级的代码分割组件，它简单到令人难以置信。
 
-`Loadable` is a higher-order component (a function that creates a component)
-which lets you dynamically load any module before rendering it into your app.
+`Loadable` 是一个告诫组件 (一个创建并返回组件的函数)，它能让你的应用程序在渲染之前动态的加载任何模块
 
-Let's imagine two components, one that imports and renders another.
+想象有两个组件，一个组件是`import`的组件，另一个是渲染组件
 
-```js
+```jsx
 import Bar from './components/Bar';
 
 class Foo extends React.Component {
@@ -113,11 +105,10 @@ class Foo extends React.Component {
 }
 ```
 
-Right now we're depending on `Bar` being imported synchronously via `import`,
-but we don't need it until we go to render it. So why don't we just defer that?
+现在我们通过`import`引入`Bar`这个组件，这是一个同步的引入，但是我们在渲染之前是并不需要这个组件的，所以我们为何不推迟引入这个组件呢？
 
-Using a **dynamic import** ([a tc39 proposal currently at Stage 3](https://github.com/tc39/proposal-dynamic-import))
-we can modify our component to load `Bar` asynchronously.
+使用 **dynamic import(动态引入)** ([a tc39 proposal currently at Stage 3](https://github.com/tc39/proposal-dynamic-import))
+我们可以修改组件`Bar`使之成为一个异步的。
 
 ```js
 class MyComponent extends React.Component {
