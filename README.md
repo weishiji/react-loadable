@@ -189,15 +189,10 @@ function Loading(props) {
 
 #### 避免 Loading 组件闪烁的问题
 
-有时候你的组件加载速度非常快(<200ms),Loading组件的loading效果在屏幕上一闪而过，好像屏幕在闪动(译者注：一般300ms,就不会出现这种屏幕闪动的不适感了).
+有时候你的组件加载速度非常快(<200ms),Loading组件的loading效果在屏幕上一闪而过.
+许多用户反馈，这样的效果会导致用户认为等待的时间要比实际时间还要长，但是如果你什么都不显示，用户反而认为加载很快。
 
-A number of user studies have proven that this causes users to perceive things
-taking longer than they really have. If you don't show anything, users perceive
-it as being faster.
-
-So your loading component will also get a [`pastDelay` prop](#propspastdelay)
-which will only be true once the component has taken longer to load than a set
-[delay](#optsdelay).
+所以你的`loading compoent`将会得到一个布尔类型为`true`[`pastDelay` prop](#propspastdelay)的返回值，当组件的加载时间比设置的[delay](#optsdelay)时间长的时候。
 
 ```js
 function Loading(props) {
@@ -210,9 +205,7 @@ function Loading(props) {
   }
 }
 ```
-
-This delay defaults to `200ms` but you can also customize the
-[delay](#optsdelay) in `Loadable`.
+默认的`delay`参数为`200ms`，但是你可以根据需要自定义[delay](#optsdelay)这个参数值
 
 ```js
 Loadable({
@@ -222,15 +215,8 @@ Loadable({
 });
 ```
 
-#### Timing out when the `loader` is taking too long
-
-Sometimes network connections suck and never resolve or fail, they just hang
-there forever. This sucks for the user because they won't know if it should
-always take this long, or if they should try refreshing.
-
-The [loading component](#loadingcomponent) will receive a
-[`timedOut` prop](#propstimedout) which will be set to `true` when the
-[`loader`](#optsloader) has timed out.
+#### `loader`超时
+有时候网络连接断开或者失败，或者永久性挂起，这时候网页无反应，用户不知道是继续等待还是重新刷新页面。这时候当[`loader`](#optsloader)超时后[loading component](#loadingcomponent) 将会接收一个[`timedOut` prop](#propstimedout) 并且这个只值为`true`
 
 ```js
 function Loading(props) {
@@ -245,9 +231,7 @@ function Loading(props) {
   }
 }
 ```
-
-However, this feature is disabled by default. To turn it on, you can pass a
-[`timeout` option](#optstimeout) to `Loadable`.
+然而这个特性默认是被禁止的，如果想打开特性，你可以通过[`timeout` option](#optstimeout)参数传递给 `Loadable`.
 
 ```js
 Loadable({
@@ -257,7 +241,8 @@ Loadable({
 });
 ```
 
-### Customizing rendering
+### 自定义渲染
+
 
 By default `Loadable` will render the `default` export of the returned module.
 If you want to customize this behavior you can use the
