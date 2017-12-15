@@ -422,18 +422,11 @@ app.get('/', (req, res) => {
 });
 ```
 
-#### 将加载的模块映射到捆绑包上
+#### 将加载的模块映射到打文件上
 
-为了确保客户端加载了所有服务端渲染的模块，我们需要将服务端的模块和webpack打包出来的捆绑包做一个映射。
+为了确保客户端加载了所有服务端渲染的模块，我们需要将服务端的模块和webpack打包出来的打包文件做一个映射。
 
-这包含两部分
-
-First we need Webpack to tell us which bundles each module lives inside. For
-this there is the [React Loadable Webpack plugin](#webpack-plugin).
-
-Import the `ReactLoadablePlugin` from `react-loadable/webpack` and include it
-in your webpack config. Pass it a `filename` for where to store the JSON data
-about our bundles.
+这包含两部分,第一部分我们需要让Webpack告诉我们每个模块需要哪个打包文件，为此我们可以使用[React Loadable Webpack plugin](#webpack-plugin)插件，在webpack config中从`react-loadable/webpack` 引入`ReactLoadablePlugin`插件，传递一个`filename`参数，webpack会将打包文件作为一个JSON数据输出到这个文件中去。
 
 ```js
 // webpack.config.js
@@ -447,13 +440,8 @@ export default {
   ],
 };
 ```
-
-Then we'll go back to our server and use this data to convert our modules to
-bundles.
-
-To convert from modules to bundles, import the [`getBundles`](#getbundles)
-method from `react-loadable/webpack` and the data from Webpack.
-
+然后我们回到我们的服务端，用刚才文件中的数据将模块转换成打包文件的数据
+将模块转换成打包文件，需要从`react-loadable/webpack`引入[`getBundles`](#getbundles)方法。
 ```js
 import Loadable from 'react-loadable';
 import { getBundles } from 'react-loadable/webpack'
@@ -473,8 +461,8 @@ app.get('/', (req, res) => {
   // ...
 });
 ```
+这时候我们可以通过`<script>`标签渲染这些打包后的文件输出到HTML中。
 
-We can then render these bundles into `<script>` tags in our HTML.
 
 ```js
 let bundles = getBundles(stats, modules);
@@ -494,17 +482,11 @@ res.send(`
 `);
 ```
 
-#### Waiting to render on the client until all the bundles are loaded
+#### 客户端会等待所有的打包文件加载完成
 
-Because of the way that Webpack works, our app in the main bundle will render
-before the other scripts are loaded.
+因为Webpack的工作方式是，我们的主打包文件会比其他的scripts预先加载，所以我们需要等待所有的文件加载完成后才开始渲染。
+为此我们需要一个全局的函数供我们调用当所有的打包文件被加载后，我们将在客户端使用[`Loadable.preloadReady()`](#loadablepreloadready)这个方法，就像在服务器使用[`Loadable.preloadAll()`](#loadablepreloadall)这个方法一样。
 
-So we'll need to defer rendering our app until they are all loaded.
-
-To do this we'll expose a global function for us to call when all the bundles
-are loaded, and we'll use the [`Loadable.preloadReady()`](#loadablepreloadready)
-method just like our [`Loadable.preloadAll()`](#loadablepreloadall) method on
-the server.
 
 ```js
 // src/entry.js
@@ -519,9 +501,7 @@ window.main = () => {
   });
 };
 ```
-
-Then in our HTML returned by the server, we'll call our global function in a
-final `<script>` tag.
+这时候在我们服务端返回的HTML的末尾处的 `<script>`标签中调用那个全局函数。
 
 ```js
 let bundles = getBundles(stats, modules);
@@ -546,7 +526,7 @@ res.send(`
   <img src="http://thejameskyle.com/img/react-loadable-api-docs.png" alt="API DOCS">
   <hr>
   <hr>
-  <small>API Docs</small>
+  <small>API 文档</small>
 </h2>
 
 ### `Loadable`
