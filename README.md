@@ -371,19 +371,12 @@ Loadable.preloadAll().then(() => {
 ### 服务端拾起客户端的状态
 
 这可能稍微有一些复杂，这可能会话费我们多一些的精力。
+为了能让客户端接管服务端的状态，我们需要在服务端使用相同的代码，
+为了实现这一点，我们首先就要通过loadable组件告诉我们到底哪个组件正在渲染。
 
-In order for us to pick up what was rendered from the server we need to have
-all the same code that was used to render on the server.
-
-To do this, we first need our loadable components telling us which modules they
-are rendering.
-
-#### Declaring which modules are being loaded
-
-There are two options in [`Loadable`](#loadable) and
-[`Loadable.Map`](#loadablemap) which are used to tell us which modules our
-component is trying to load: [`opts.modules`](#optsmodules) and
-[`opts.webpack`](#optswebpack).
+#### 声明哪个模块被加载
+这里有两个参数[`Loadable`](#loadable)和[`Loadable.Map`](#loadablemap)能告诉我们哪个组件正在加载： [`opts.modules`](#optsmodules) 和
+[`opts.webpack`](#optswebpack)
 
 ```js
 Loadable({
@@ -392,11 +385,9 @@ Loadable({
   webpack: () => [require.resolveWeak('./Bar')],
 });
 ```
+但是我们不必太担心这些参数，React Loadable有一个[Babel plugin](#babel-plugin)插件可以完成这些设置。
 
-But don't worry too much about these options. React Loadable includes a
-[Babel plugin](#babel-plugin) to add them for you.
-
-Just add the `react-loadable/babel` plugin to your Babel config:
+将 `react-loadable/babel` 加入到你的`Babel config`中:
 
 ```json
 {
@@ -405,16 +396,13 @@ Just add the `react-loadable/babel` plugin to your Babel config:
   ]
 }
 ```
+现在这些参数将会被自动被创建。
 
-Now these options will automatically be provided.
 
-#### Finding out which dynamic modules were rendered
+#### 找出哪些动态模块正在被加载
 
-Next we need to find out which modules were actually rendered when a request
-comes in.
-
-For this, there is [`Loadable.Capture`](#loadablecapture) component which can
-be used to collect all the modules that were rendered.
+下一步我们将找到当请求进来的时候，哪些模块是真正需要被加载的。
+为此，我们有一个[`Loadable.Capture`](#loadablecapture)组件可以使用，它能收集所有的被加载的模块。
 
 ```js
 import Loadable from 'react-loadable';
@@ -434,12 +422,11 @@ app.get('/', (req, res) => {
 });
 ```
 
-#### Mapping loaded modules to bundles
+#### 将加载的模块映射到捆绑包上
 
-In order to make sure that the client loads all the modules that were rendered
-server-side, we'll need to map them to the bundles that Webpack created.
+为了确保客户端加载了所有服务端渲染的模块，我们需要将服务端的模块和webpack打包出来的捆绑包做一个映射。
 
-This comes in two parts.
+这包含两部分
 
 First we need Webpack to tell us which bundles each module lives inside. For
 this there is the [React Loadable Webpack plugin](#webpack-plugin).
