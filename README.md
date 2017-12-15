@@ -81,15 +81,15 @@ Code-splitting（代码分割）是把项目中一个大的入口文件分割成
 
 > **Example:** 假设你的主应用程序是在一个选项卡里,用户可能永远也不会进入这个选项卡下的应用程序，所以父路由组件为何要加载这个选项卡所对应的组件呢？ 
 
-还有一个地方，你可以优先加载优先级高的组件。那些页面底部的组件为何要和页面顶部的组件同时加载呢？
+还有一个地方，你可以优先加载优先级高的组件。那些页面底部的组件为何要和页面顶部的组件同时加载呢？
 
-由于路由即组件，所以我们仍然可以很轻松的在组件层面做code-split(代码分割)
+由于路由即组件，所以我们仍然可以很轻松的在组件层面做code-split(代码分割)
 
-在一个新项目中使用`code-spliting`非常简单，以至于你都不用想两遍，你只需要改动少量代码就可以完成自动的代码分割。
+在一个新项目中使用`code-spliting`非常简单，以至于你都不用想两遍，你只需要改动少量代码就可以完成自动的代码分割。
 
 ### React Loadable 简介
 
-React Loadable 是一个轻量级的代码分割组件，它简单到令人难以置信。
+React Loadable 是一个轻量级的代码分割组件，它简单到令人难以置信。
 
 `Loadable` 是一个告诫组件 (一个创建并返回组件的函数)，它能让你的应用程序在渲染之前动态的加载任何模块
 
@@ -133,7 +133,7 @@ class MyComponent extends React.Component {
 }
 ```
 
-但是这是一整个工作流程，并不是单纯的代码分割这一件事儿这么简单，比如当`import()`失败我们该怎么办？怎么作server-side rendering(服务端渲染)？这时候你可以抽象出`Loadable`来解决这些问题。
+但是这是一整个工作流程，并不是单纯的代码分割这一件事儿这么简单，比如当`import()`失败我们该怎么办？怎么作server-side rendering(服务端渲染)？这时候你可以抽象出`Loadable`来解决这些问题。
 
 ```js
 import Loadable from 'react-loadable';
@@ -152,14 +152,14 @@ class MyComponent extends React.Component {
 }
 ```
 
-### 通过 `import()`自动 code-splitting(代码分割)
+### 通过 `import()`自动 code-splitting(代码分割)
 
 在webpack2+中，当你使用`import()`的时候，它会为你[自动代码分割](https://webpack.js.org/guides/code-splitting/)，而不用做外的设置。
 
 这意味着通过使用React Loadable和`import()`可以很快的实验出新的代码分割点来，这是程序中的最佳实践.
 
 ### 创建一个更好的"Loading..." 组件
-渲染一个静态的"Loading..."已经不能传达出足够的信息给用户了。有时有我们还要想要表现出更多的状态来，比如错误和超时等,这是一个非常好的经历。
+渲染一个静态的"Loading..."已经不能传达出足够的信息给用户了。有时有我们还要想要表现出更多的状态来，比如错误和超时等,这是一个非常好的经历。
 
 ```js
 function Loading() {
@@ -173,7 +173,7 @@ Loadable({
 ```
 这样做非常好，你的[loading component](#loadingcomponent)会接收多个不同的props。
 
-#### Loading 的错误状态
+#### Loading 的错误状态
 
 当[`loader`](optsloader)加载失败，[loading component](#loadingcomponent)组件会接收一个[`error`](propserror)为`true`的prop(否则为`false`).
 
@@ -189,10 +189,10 @@ function Loading(props) {
 
 #### 避免 Loading 组件闪烁的问题
 
-有时候你的组件加载速度非常快(<200ms),Loading组件的loading效果在屏幕上一闪而过.
-许多用户反馈，这样的效果会导致用户认为等待的时间要比实际时间还要长，但是如果你什么都不显示，用户反而认为加载很快。
+有时候你的组件加载速度非常快(<200ms),Loading组件的loading效果在屏幕上一闪而过.
+许多用户反馈，这样的效果会导致用户认为等待的时间要比实际时间还要长，但是如果你什么都不显示，用户反而认为加载很快。
 
-所以你的`loading compoent`将会得到一个布尔类型为`true`[`pastDelay` prop](#propspastdelay)的返回值，当组件的加载时间比设置的[delay](#optsdelay)时间长的时候。
+所以你的`loading compoent`将会得到一个布尔类型为`true`[`pastDelay` prop](#propspastdelay)的返回值，当组件的加载时间比设置的[delay](#optsdelay)时间长的时候。
 
 ```js
 function Loading(props) {
@@ -216,7 +216,7 @@ Loadable({
 ```
 
 #### `loader`超时
-有时候网络连接断开或者失败，或者永久性挂起，这时候网页无反应，用户不知道是继续等待还是重新刷新页面。这时候当[`loader`](#optsloader)超时后[loading component](#loadingcomponent) 将会接收一个[`timedOut` prop](#propstimedout) 并且这个只值为`true`
+有时候网络连接断开或者失败，或者永久性挂起，这时候网页无反应，用户不知道是继续等待还是重新刷新页面。这时候当[`loader`](#optsloader)超时后[loading component](#loadingcomponent) 将会接收一个[`timedOut` prop](#propstimedout) 并且这个只值为`true`
 
 ```js
 function Loading(props) {
@@ -231,7 +231,7 @@ function Loading(props) {
   }
 }
 ```
-然而这个特性默认是被禁止的，如果想打开特性，你可以通过[`timeout` option](#optstimeout)参数传递给 `Loadable`.
+然而这个特性默认是被禁止的，如果想打开特性，你可以通过[`timeout` option](#optstimeout)参数传递给 `Loadable`.
 
 ```js
 Loadable({
@@ -243,10 +243,7 @@ Loadable({
 
 ### 自定义渲染
 
-
-By default `Loadable` will render the `default` export of the returned module.
-If you want to customize this behavior you can use the
-[`render` option](#optsrender).
+`Loadable`会渲染`default`导出的组件，如果你想渲染自定义导出的组件，请使用[`render` option](#optsrender)参数
 
 ```js
 Loadable({
@@ -258,14 +255,10 @@ Loadable({
 });
 ```
 
-### Loading multiple resources
+### 加载多个资源
+从技术上讲，你可以用`loader()`加载任何只要是一个promise的资源[you're able to render something](#customizing-rendering)，但是这样用起来确实有点让人恼火。
 
-Technically you can do whatever you want within `loader()` as long as it
-returns a promise and [you're able to render something](#customizing-rendering).
-But writing it out can be a bit annoying.
-
-To make it easier to load multiple resources in parallel, you can use
-[`Loadable.Map`](#loadablemap).
+你可以使用[`Loadable.Map`](#loadablemap)让加载多个资源变得更加容易一些。
 
 ```js
 Loadable.Map({
@@ -281,20 +274,13 @@ Loadable.Map({
 });
 ```
 
-When using `Loadable.Map` the [`render()` method](#optsrender) is required. It
-will be passed a `loaded` param which will be an object matching the shape of
-your `loader`.
+当使用`Loadable.Map`的时候，[`render()` method](#optsrender)是一个必要参数，他会传递一个匹配后的对象参数到`loader`中去。
 
-### Preloading
 
-As an optimization, you can also decide to preload a component before it gets
-rendered.
+### 预加载
 
-For example, if you need to load a new component when a button gets pressed,
-you could start preloading the component when the user hovers over the button.
-
-The component created by `Loadable` exposes a
-[static `preload` method](#loadablecomponentpreload) which does exactly this.
+还有一个优化项，你可以决定哪些组件在渲染之前进行预先加载。
+比如：当按钮点击之前你需要加载一个新的组件，这个组件是被`Loadable`中的[static `preload` method](#loadablecomponentpreload)创建的。
 
 ```js
 const LoadableBar = Loadable({
@@ -336,6 +322,7 @@ class MyComponent extends React.Component {
   <hr>
   <small>Server-Side Rendering</small>
 </h2>
+
 
 When you go to render all these dynamically loaded components, what you'll get
 is a whole bunch of loading screens.
