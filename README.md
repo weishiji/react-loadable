@@ -1064,7 +1064,7 @@ JavaScript depending on your Webpack configuration.
 To handle this, you should manually filter down to the file extensions that
 you care about:
 
-```js
+```jsx
 let bundles = getBundles(stats, modules);
 
 let styles = bundles.filter(bundle => bundle.file.endsWith('.css'));
