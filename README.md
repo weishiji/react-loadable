@@ -320,17 +320,12 @@ class MyComponent extends React.Component {
   <img src="http://thejameskyle.com/img/react-loadable-ssr.png" alt="SERVER SIDE RENDERING">
   <hr>
   <hr>
-  <small>Server-Side Rendering</small>
+  <small>Server-Side Rendering(服务端渲染)</small>
 </h2>
 
+当你渲染所有所有已经动态加载完成的组件的时候，你将会得到一堆loading的效果，这看起来确实很糟糕，但是好消息是React Loadable在设计之初就支持服务端渲染的，这样就不会出现首屏加载效果了。
 
-When you go to render all these dynamically loaded components, what you'll get
-is a whole bunch of loading screens.
-
-This really sucks, but the good news is that React Loadable is designed to
-make server-side rendering work as if nothing is being loaded dynamically.
-
-Here's our starting server using [Express](https://expressjs.com/).
+我们通过[Express](https://expressjs.com/)开启一个服务。
 
 ```js
 import express from 'express';
@@ -358,15 +353,12 @@ app.listen(3000, () => {
 });
 ```
 
-### Preloading all your loadable components on the server
+### 服务端预加载所有的组件
 
-The first step to rendering the correct content from the server is to make sure
-that all of your loadable components are already loaded when you go to render
-them.
+第一件事儿就是在渲染正确的内容之前，确保你的服务端已经加载了所有的组件了。
 
-To do this, you can use the [`Loadable.preloadAll`](#loadablepreloadall)
-method. It returns a promise that will resolve when all your loadable
-components are ready.
+我们可以使用 [`Loadable.preloadAll`](#loadablepreloadall)
+这个方法.他会返回一个所有组件加载完成的一个代理。
 
 ```js
 Loadable.preloadAll().then(() => {
@@ -376,10 +368,9 @@ Loadable.preloadAll().then(() => {
 });
 ```
 
-### Picking up a server-side rendered app on the client
+### 服务端拾起客户端的状态
 
-This is where things get a little bit tricky. So let's prepare ourselves
-little bit.
+这可能稍微有一些复杂，这可能会话费我们多一些的精力。
 
 In order for us to pick up what was rendered from the server we need to have
 all the same code that was used to render on the server.
