@@ -531,9 +531,7 @@ res.send(`
 
 ### `Loadable`
 
-A higher-order component for dynamically [loading](#optsloader) a module before
-[rendering](#optsrender) it, a [loading](#opts.loading) component is rendered
-while the module is unavailable.
+[rendering](#optsrender)前动态[loading](#optsloader)模块的一个高阶组件，当模块无法被加载的时候，[loading](#opts.loading) 组件会被渲染.
 
 ```js
 const LoadableComponent = Loadable({
@@ -544,14 +542,12 @@ const LoadableComponent = Loadable({
 });
 ```
 
-This returns a [LoadableComponent](#loadablecomponent).
+它返回一个 [LoadableComponent](#loadablecomponent)组件.
 
 ### `Loadable.Map`
 
-A higher-order component that allows you to load multiple resources in parallel.
-
-Loadable.Map's [`opts.loader`](#optsloader) accepts an object of functions, and
-needs a [`opts.render`](#optsrender) method.
+一个允许你并行加载多个资源点的高阶组件。
+Loadable.Map's [`opts.loader`](#optsloader)接收一个对象，并且需要[`opts.render`](#optsrender)方法
 
 ```js
 Loadable.Map({
@@ -566,24 +562,21 @@ Loadable.Map({
   }
 });
 ```
-
-When using `Loadable.Map` the `render()` method's `loaded` param will be an
-object with the same shape as your `loader`.
+当调用`Loadable.Map`中的`render()`方法， 这个方法中的`loaded`参数将会和`loader`方法起到一样的作用。
 
 ### `Loadable` and `Loadable.Map` Options
 
 #### `opts.loader`
 
-A function returning a promise that loads your module.
+一个加载模块的promose函数
+
 
 ```js
 Loadable({
   loader: () => import('./Bar'),
 });
 ```
-
-When using with [`Loadable.Map`](#loadablemap) this accepts an object of these
-types of functions.
+当调用[`Loadable.Map`](#loadablemap)的时候，它接收对象行函数。
 
 ```js
 Loadable.Map({
@@ -593,22 +586,18 @@ Loadable.Map({
   },
 });
 ```
-
-When using with `Loadable.Map` you'll also need to pass a
-[`opts.render`](#optsrender) function.
+当调用`Loadable.Map`的时候，你也需要传递[`opts.render`](#optsrender)函数
 
 #### `opts.loading`
 
-A [`LoadingComponent`](#loadingcomponent) that renders while a module is
-loading or when it errors.
+当模块加载或者加载失败的时候，这个组件会被渲染。
 
 ```js
 Loadable({
   loading: LoadingComponent,
 });
 ```
-
-This option is required, if you don't want to render anything, return `null`.
+这个参数是必选参数，如果你不想渲染任何，让它返回`null`就好了。
 
 ```js
 Loadable({
@@ -618,9 +607,7 @@ Loadable({
 
 #### `opts.delay`
 
-Time to wait (in milliseconds) before passing
-[`props.pastDelay`](#propspastdelay) to your [`loading`](#optsloading)
-component. This defaults to `200`.
+延时毫秒数[`props.pastDelay`](#propspastdelay)后加载渲染[`loading`](#optsloading)组件，默认值是`200`
 
 ```js
 Loadable({
@@ -628,13 +615,11 @@ Loadable({
 });
 ```
 
-[Read more about delays](#avoiding-flash-of-loading-component).
+[查看关于更多delay](#avoiding-flash-of-loading-component).
 
 #### `opts.timeout`
 
-Time to wait (in milliseconds) before passing
-[`props.timedOut`](#propstimedout) to your [`loading`](#optsloading) component.
-This is turned off by default.
+[`props.timedOut`](#propstimedout)超时的毫秒数后显示[`loading`](#optsloading)组件，默认是关闭的。
 
 ```js
 Loadable({
@@ -642,11 +627,10 @@ Loadable({
 });
 ```
 
-[Read more about timeouts](#timing-out-when-the-loader-is-taking-too-long).
+[更多关于 timeouts](#timing-out-when-the-loader-is-taking-too-long).
 
 #### `opts.render`
-
-A function to customize the rendering of loaded modules.
+自定义渲染加载模块的函数
 
 Receives `loaded` which is the resolved value of [`opts.loader`](#optsloader)
 and `props` which are the props passed to the
