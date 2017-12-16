@@ -735,7 +735,7 @@ function LoadingComponent(props) {
 
 #### `props.timedOut`
 
-[`LoadingComponent`](#loadingcomponent)组件设置[`timeout`](#optstimeout)参数后,`props.timedOut`将接受一个布尔类型的返回值。
+[`LoadingComponent`](#loadingcomponent)组件设置[`timeout`](#optstimeout)参数后,`props.timedOut`将接受一个布尔类型的返回值。
 
 ```js
 function LoadingComponent(props) {
@@ -767,7 +767,7 @@ function LoadingComponent(props) {
 
 ### `Loadable.preloadAll()`
 
-等待所有被预加载的组件[`LoadableComponent.preload`](#loadablecomponentpreload)完成加载，允许你在各种环境里预加载你的组件，比如在服务端。
+等待所有被预加载的组件[`LoadableComponent.preload`](#loadablecomponentpreload)完成加载，允许你在各种环境里预加载你的组件，比如在服务端。
 
 ```js
 Loadable.preloadAll().then(() => {
@@ -938,7 +938,7 @@ let bundles = getBundles(stats, modules);
   <small>FAQ</small>
 </h2>
 
-### 如果避免重复调用?
+### 如果避免重复调用?
 
 假定你的`Loadable()`会重复设置`loading`组件和`delay`参数,你可以用高阶组件 (HOC)去封装一层`Loadable`,并为它设置一些默认参数.
 
@@ -955,7 +955,7 @@ export default function MyLoadable(opts) {
 };
 ```
 
-这时候你只需要设置`loader`就可以使用它。
+这时候你只需要设置`loader`就可以使用它。
 
 ```js
 import MyLoadable from './MyLoadable';
@@ -971,7 +971,7 @@ export default class App extends React.Component {
 }
 ```
 
-不幸的是，如果你用HOC对Loadable封装一层会使[react-loadable/babel](#babel-plugin)失效，所以这时候你需要手动的添加必要参数（`modules`, `webpack`）.
+不幸的是，如果你用HOC对Loadable封装一层会使[react-loadable/babel](#babel-plugin)失效，所以这时候你需要手动的添加必要参数（`modules`, `webpack`）.
 
 ```js
 import MyLoadable from './MyLoadable';
@@ -989,7 +989,7 @@ export default class App extends React.Component {
 }
 ```
 
-### 如果在服务端渲染中使用其他的比如`.css`或者`.map`资源
+### 如果在服务端渲染中使用其他的比如`.css`或者`.map`资源
 
 当你调用[`getBundles`](#getbundles)方法的时候，它会返回Javascript依赖的文件类型在你的Webpack配置中.
 
