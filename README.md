@@ -631,10 +631,7 @@ Loadable({
 
 #### `opts.render`
 自定义渲染加载模块的函数
-
-Receives `loaded` which is the resolved value of [`opts.loader`](#optsloader)
-and `props` which are the props passed to the
-[`LoadableComponent`](#loadablecomponent).
+它接收 [`opts.loader`](#optsloader)代理返回的`loaded`参数和[`LoadableComponent`](#loadablecomponent)传递的`props`两个参数。
 
 ```js
 Loadable({
@@ -646,9 +643,7 @@ Loadable({
 ```
 
 #### `opts.webpack`
-
-An optional function which returns an array of Webpack module ids which you can
-get with `require.resolveWeak`.
+可选参数，可通过`require.resolveWeak`获取返回的一个Webpack模块id的集合。
 
 ```js
 Loadable({
@@ -656,12 +651,11 @@ Loadable({
   webpack: () => [require.resolveWeak('./Foo')],
 });
 ```
-
-This option can be automated with the [Babel Plugin](#babel-plugin).
+这个参数可通过[Babel Plugin](#babel-plugin)自动生成.
 
 #### `opts.modules`
 
-An optional array with module paths for your imports.
+可选参数，imports模块路径的数组集合
 
 ```js
 Loadable({
@@ -670,40 +664,34 @@ Loadable({
 });
 ```
 
-This option can be automated with the [Babel Plugin](#babel-plugin).
+可选参数，可通过[Babel Plugin](#babel-plugin)插件自动生成。
 
 ### `LoadableComponent`
 
-This is the component returned by `Loadable` and `Loadable.Map`.
+`Loadable` 和 `Loadable.Map`返回的组件.
 
 ```js
 const LoadableComponent = Loadable({
   // ...
 });
 ```
-
-Props passed to this component will be passed straight through to the
-dynamically loaded component via [`opts.render`](#optsrender).
+当组件加载的时候调用[`opts.render`](#optsrender)方法，它会直接接收props参数。
 
 #### `LoadableComponent.preload()`
 
-This is a static method on [`LoadableComponent`](#loadablecomponent) which can
-be used to load the component ahead of time.
+[`LoadableComponent`](#loadablecomponent)调用的一个静态方法，可以让组件预加载。
 
 ```js
 const LoadableComponent = Loadable({...});
 
 LoadableComponent.preload();
 ```
+返回一个代理，但是尽量避免此代理阻塞你的UI更新，否则会带来非常不好的用户体验。
 
-This returns a promise, but you should avoid waiting for that promise to
-resolve to update your UI. In most cases it creates a bad user experience.
-
-[Read more about preloading](#preloading).
+[关于更多 preloading](#preloading).
 
 ### `LoadingComponent`
-
-This is the component you pass to [`opts.loading`](#optsloading).
+ 传给[`opts.loading`](#optsloading)方法的一个组件.
 
 ```js
 function LoadingComponent(props) {
@@ -727,12 +715,11 @@ Loading({
 });
 ```
 
-[Read more about loading components](#creating-a-great-loading-component)
+[关于更多 loading components](#creating-a-great-loading-component)
 
 #### `props.error`
 
-A boolean prop passed to [`LoadingComponent`](#loadingcomponent) when the
-[`loader`](#optsloader) has failed.
+[`LoadingComponent`](#loadingcomponent)的一个布尔类型的参数，当[`loader`](#optsloader)模块加载失败的时候，为`true`.
 
 ```js
 function LoadingComponent(props) {
@@ -744,12 +731,11 @@ function LoadingComponent(props) {
 }
 ```
 
-[Read more about errors](#loading-error-states).
+[更多关于 errors](#loading-error-states).
 
 #### `props.timedOut`
 
-A boolean prop passed to [`LoadingComponent`](#loadingcomponent) after a set
-[`timeout`](#optstimeout).
+[`LoadingComponent`](#loadingcomponent)组件设置[`timeout`](#optstimeout)参数后,props中的一个属性将接受布尔类型的值。
 
 ```js
 function LoadingComponent(props) {
@@ -761,7 +747,7 @@ function LoadingComponent(props) {
 }
 ```
 
-[Read more about timeouts](#timing-out-when-the-loader-is-taking-too-long).
+[更多关于 timeouts](#timing-out-when-the-loader-is-taking-too-long).
 
 #### `props.pastDelay`
 
