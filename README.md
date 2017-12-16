@@ -735,7 +735,7 @@ function LoadingComponent(props) {
 
 #### `props.timedOut`
 
-[`LoadingComponent`](#loadingcomponent)组件设置[`timeout`](#optstimeout)参数后,props中的一个属性将接受布尔类型的值。
+[`LoadingComponent`](#loadingcomponent)组件设置[`timeout`](#optstimeout)参数后,`props.timedOut`将接受一个布尔类型的返回值。
 
 ```js
 function LoadingComponent(props) {
@@ -751,8 +751,7 @@ function LoadingComponent(props) {
 
 #### `props.pastDelay`
 
-A boolean prop passed to [`LoadingComponent`](#loadingcomponent) after a set
-[`delay`](#optsdelay).
+[`LoadingComponent`](#loadingcomponent)设置[`delay`](#optsdelay)参数后，`props.pastDelay`将接受一个布尔类型的返回值.
 
 ```js
 function LoadingComponent(props) {
@@ -764,14 +763,11 @@ function LoadingComponent(props) {
 }
 ```
 
-[Read more about delays](#avoiding-flash-of-loading-component).
+[更多关于delays](#avoiding-flash-of-loading-component).
 
 ### `Loadable.preloadAll()`
 
-This will call all of the
-[`LoadableComponent.preload`](#loadablecomponentpreload) methods recursively
-until they are all resolved. Allowing you to preload all of your dynamic
-modules in environments like the server.
+等待所有被预加载的组件[`LoadableComponent.preload`](#loadablecomponentpreload)完成加载，允许你在各种环境里预加载你的组件，比如在服务端。
 
 ```js
 Loadable.preloadAll().then(() => {
@@ -781,9 +777,7 @@ Loadable.preloadAll().then(() => {
 });
 ```
 
-It's important to note that this requires that you declare all of your loadable
-components when modules are initialized rather than when your app is being
-rendered.
+注意非常重要的一点，预先加载你所有声明过的`loadable`组件在启动你的服务.
 
 **Good:**
 
@@ -811,15 +805,13 @@ class MyComponent extends React.Component {
 }
 ```
 
-> **Note:** `Loadable.preloadAll()` will not work if you have more than one
-> copy of `react-loadable` in your app.
+> **注意:** `Loadable.preloadAll()` 如果你的项目里有多个`Loadable.preloadAll()`,`react-loadable`将会失效。
 
-[Read more about preloading on the server](#preloading-all-your-loadable-components-on-the-server).
+[更多关于 preloading on the server](#preloading-all-your-loadable-components-on-the-server).
 
 ### `Loadable.preloadReady()`
 
-Check for modules that are already loaded in the browser and call the matching
-[`LoadableComponent.preload`](#loadablecomponentpreload) methods.
+检查浏览器里已经加载所有模块并且调用`matching`[`LoadableComponent.preload`](#loadablecomponentpreload)方法
 
 ```js
 window.main = () => {
@@ -829,14 +821,13 @@ window.main = () => {
 };
 ```
 
-[Read more about preloading on the client](#waiting-to-render-on-the-client-until-all-the-bundles-are-loaded).
+[更多关于 preloading on the client](#waiting-to-render-on-the-client-until-all-the-bundles-are-loaded).
 
 ### `Loadable.Capture`
 
-A component for reporting which modules were rendered.
+记录哪个模块被渲染的一个组件.
 
-Accepts a `report` prop which is called for every `moduleName` that is
-rendered via React Loadable.
+每个被React Loadable组件在被渲染的时候，接收一个被每个`moduleName`调用的`report` prop。
 
 ```js
 let modules = [];
@@ -850,15 +841,13 @@ let html = ReactDOMServer.renderToString(
 console.log(modules);
 ```
 
-[Read more about capturing rendered modules](#finding-out-which-dynamic-modules-were-rendered).
+[更多关于 capturing rendered modules](#finding-out-which-dynamic-modules-were-rendered).
 
 ## Babel Plugin
 
-Providing [`opts.webpack`](#optswebpack) and [`opts.modules`](#optsmodules) for
-every loadable component is a lot of manual work to remember to do.
+为每个loadable 组件适配[`opts.webpack`](#optswebpack)和[`opts.modules`](#optsmodules)参数是一件很耗费体力的一件事儿，并且你还要始终记着去做。
 
-Instead you can add the Babel plugin to your config and it will automate it for
-you:
+你可以用Babel plugin写到你的配置文件里去让Webpack自动完成这件事儿，从而代替手动去做。
 
 ```json
 {
@@ -905,13 +894,11 @@ const LoadableComponents = Loadable.Map({
 });
 ```
 
-[Read more about declaring modules](#declaring-which-modules-are-being-loaded).
+[更多关于declaring modules](#declaring-which-modules-are-being-loaded).
 
 ## Webpack Plugin
 
-In order to [send the right bundles down](#mapping-loaded-modules-to-bundles)
-when rendering server-side, you'll need the React Loadable Webpack plugin 
-to provide you with a mapping of modules to bundles.
+当服务端渲染的时候，为了[send the right bundles down](#mapping-loaded-modules-to-bundles)，你需要`React Loadable Webpack plugin`插件生成一个模块和打包文件有对应关系的JSON文件.
 
 ```js
 // webpack.config.js
@@ -926,15 +913,13 @@ export default {
 };
 ```
 
-This will create a file (`opts.filename`) which you can import to map modules
-to bundles.
+它将产生一个JSON文件(`opts.filename`)，你可以引入这个模块和打包文件相对应的JSON文件
 
-[Read more about mapping modules to bundles](#mapping-loaded-modules-to-bundles).
+[更多关于 mapping modules to bundles](#mapping-loaded-modules-to-bundles).
 
 ### `getBundles`
 
-A method exported by `react-loadable/webpack` for converting modules to
-bundles.
+通过`react-loadable/webpack`方法可以导出一个模块和打包文件的映射关系.
 
 ```js
 import { getBundles } from 'react-loadable/webpack';
@@ -942,7 +927,7 @@ import { getBundles } from 'react-loadable/webpack';
 let bundles = getBundles(stats, modules);
 ```
 
-[Read more about mapping modules to bundles](#mapping-loaded-modules-to-bundles).
+[更多关于 mapping modules to bundles](#mapping-loaded-modules-to-bundles).
 
 <h2>
   <hr>
@@ -953,11 +938,9 @@ let bundles = getBundles(stats, modules);
   <small>FAQ</small>
 </h2>
 
-### How do I avoid repetition?
+### 如果避免重复调用?
 
-Specifying the same `loading` component or `delay` every time you use
-`Loadable()` gets repetitive fast. Instead you can wrap `Loadable` with your
-own Higher-Order Component (HOC) to set default options.
+假定你的`Loadable()`会重复设置`loading`组件和`delay`参数,你可以用高阶组件 (HOC)去封装一层`Loadable`,并为它设置一些默认参数.
 
 ```js
 import Loadable from 'react-loadable';
@@ -972,7 +955,7 @@ export default function MyLoadable(opts) {
 };
 ```
 
-Then you can just specify a `loader` when you go to use it.
+这时候你只需要设置`loader`就可以使用它。
 
 ```js
 import MyLoadable from './MyLoadable';
@@ -988,7 +971,7 @@ export default class App extends React.Component {
 }
 ```
 
-Unfortunately at the moment using wrapped Loadable breaks [react-loadable/babel](#babel-plugin) so in such case you have to add required properties (`modules`, `webpack`) manually.
+不幸的是，如果你用HOC对Loadable封装一层会使[react-loadable/babel](#babel-plugin)失效，所以这时候你需要手动的添加必要参数（`modules`, `webpack`）.
 
 ```js
 import MyLoadable from './MyLoadable';
@@ -1006,13 +989,11 @@ export default class App extends React.Component {
 }
 ```
 
-### How do I handle other styles `.css` or sourcemaps `.map` with server-side rendering?
+### 如果在服务端渲染中使用其他的比如`.css`或者`.map`资源
 
-When you call [`getBundles`](#getbundles), it may return file types other than
-JavaScript depending on your Webpack configuration.
+当你调用[`getBundles`](#getbundles)方法的时候，它会返回Javascript依赖的文件类型在你的Webpack配置中.
 
-To handle this, you should manually filter down to the file extensions that
-you care about:
+为得到这些，你需要手动的过滤一下文件类型,像这样：
 
 ```jsx
 let bundles = getBundles(stats, modules);
